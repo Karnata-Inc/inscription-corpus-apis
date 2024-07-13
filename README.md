@@ -1,4 +1,7 @@
-# Epigraphia Carnatica Online application/database
+# Inscription Corpus and APIs
+
+Forked from https://github.com/ShreyasKolpe/epigraphia-rest-apis
+
 
 <!-- TOC start (generated with https://github.com/derlin/bitdowntoc) -->
 
