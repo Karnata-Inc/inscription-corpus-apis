@@ -465,14 +465,6 @@ class InscriptionView(View):
                     "id": inscription.source_text_chapter.source_text_chapter_id,
                     "title": inscription.source_text_chapter.source_text_chapter_title,
                 },
-                "location": {
-                    "id": inscription.location.location_id,
-                    "name": inscription.location.location_name,
-                    "coordinates": {
-                        "latitude": inscription.location.coordinates[1],
-                        "longitude": inscription.location.coordinates[0]
-                    }
-                },
                 "inscription_id": inscription.inscription_id,
                 "inscription_number": inscription.source_text_inscription_number,
                 "inscription_text_header": inscription_text.header,
@@ -485,6 +477,16 @@ class InscriptionView(View):
                 "transliteration": transliteration.transliteration,
                 "transliteration_footnotes": transliteration.footnotes
         }
+
+        if inscription.location:
+            response_data["location"] = {
+                    "id": inscription.location.location_id,
+                    "name": inscription.location.location_name,
+                    "coordinates": {
+                        "latitude": inscription.location.coordinates[1],
+                        "longitude": inscription.location.coordinates[0]
+                    }
+            }
         response = {
             "status": 200,
             "message": "Successfully registered inscription text and/or translation and/or transliteration",
@@ -613,7 +615,7 @@ def extract_inscription_attributes(inscription):
             "coordinates": {
                 "latitude": inscription.coordinates[1],
                 "longitude": inscription.coordinates[0]
-            }
+            } if inscription.coordinates else None
         },
         "inscription_number": inscription.source_text_inscription_number,
         "inscription_text_header": inscription.inscription_text_header,

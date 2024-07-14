@@ -167,7 +167,7 @@ class InscriptionAdminForm(forms.ModelForm):
 
     class Meta:
         model = models.Inscription
-        fields = ('source_text', 'source_text_chapter', 'location', 'source_text_inscription_number')
+        fields = ('source_text', 'source_text_chapter', 'source_text_inscription_number')
         exclude = ('created_by', 'last_modified_by', 'created_at', 'last_modified_at')
 
 
