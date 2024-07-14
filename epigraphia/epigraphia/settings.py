@@ -21,6 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY='8$lyz1zjbn4avogbkd(py-u83-r)pt9tn#rqs2u&+^_n8yib(m'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -41,7 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.gis',
-    'mapwidgets'
+    'mapwidgets',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
@@ -52,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware'
 ]
 
 ROOT_URLCONF = 'epigraphia.urls'
@@ -81,9 +84,9 @@ WSGI_APPLICATION = 'epigraphia.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.mysql',
-        'NAME': '',
-        'USER': '',
-        'PASSWORD': '',
+        'NAME': 'inscription_corpus',
+        'USER': 'shreyas',
+        'PASSWORD': 'password',
         'HOST': '',
         'PORT': ''
     }
@@ -134,7 +137,18 @@ STATIC_URL = '/static/'
 # Needed for collecting assets of packages like django-map-widgets
 STATIC_ROOT = "static_assets"
 
+STATICFILES_DIRS = [
+    BASE_DIR / "static_common"
+]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# DJANGO-CORS-HEADERS settings
+
+CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_WHITELIST = (
+  'http://localhost:3000',
+)
